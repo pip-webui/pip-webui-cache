@@ -1,0 +1,29 @@
+<div class="controls">
+    <h2>Read photo first</h2>
+    <md-input-container md-no-float>
+        <label>ID</label>
+        <input ng-model="id" placeholder="ID" required>
+    </md-input-container>
+    <md-button ng-click="readPhoto()" ng-disabled="!id">Read single photo</md-button>
+    <h2>Then update it</h2>
+    <md-input-container md-no-float>
+        <label>Album ID</label>
+        <input ng-model="item.albumId" placeholder="Album ID">
+    </md-input-container>
+    <md-input-container md-no-float>
+        <label>Title</label>
+        <input ng-model="item.title" placeholder="Title">
+    </md-input-container>
+    <md-input-container md-no-float>
+        <label>URL</label>
+        <input ng-model="item.url" placeholder="URL">
+    </md-input-container>
+    <md-input-container md-no-float>
+        <label>Thumbnail url</label>
+        <input ng-model="item.thumbnailUrl" placeholder="Thumbnail url">
+    </md-input-container>
+    <md-button ng-click="savePhoto()" ng-disabled="!item || !item.id">Save photo</md-button>
+</div>
+<pre class="result">
+    {{result}}
+</pre>

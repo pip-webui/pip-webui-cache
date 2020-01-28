@@ -1,0 +1,22 @@
+<div class="controls">
+    <md-input-container md-no-float>
+        <label>Album ID</label>
+        <input ng-model="item.albumId" placeholder="Album ID">
+    </md-input-container>
+    <md-input-container md-no-float>
+        <label>Title</label>
+        <input ng-model="item.title" placeholder="Title">
+    </md-input-container>
+    <md-input-container md-no-float>
+        <label>URL</label>
+        <input ng-model="item.url" placeholder="URL">
+    </md-input-container>
+    <md-input-container md-no-float>
+        <label>Thumbnail url</label>
+        <input ng-model="item.thumbnailUrl" placeholder="Thumbnail url">
+    </md-input-container>
+    <md-button ng-click="createPhoto()">Create photo</md-button>
+</div>
+<pre class="result">
+    {{result}}
+</pre>

@@ -1,0 +1,20 @@
+<div class="controls">
+    <md-input-container md-no-float>
+        <label>Page</label>
+        <input ng-model="page" placeholder="Page">
+    </md-input-container>
+    <md-input-container md-no-float>
+        <label>Limit</label>
+        <input ng-model="limit" placeholder="L">
+    </md-input-container>
+    <md-input-container md-no-float>
+        <label>ID</label>
+        <input ng-model="id" placeholder="ID">
+    </md-input-container>
+    <md-button ng-click="readAllPhotos()">Read all photos</md-button>
+    <md-button ng-click="readPhotos()">Read photos</md-button>
+    <md-button ng-click="readPhoto()">Read single photo</md-button>
+</div>
+<pre class="result">
+    {{result}}
+</pre>

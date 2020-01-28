@@ -1,0 +1,24 @@
+{
+  "name": "pip-webui-cache",
+  "version": "1.0.0",
+  "author": "Conceptual Vision Consulting LLC",
+  "description": "Cache system for Pip.WebUI",
+  "contributors": [
+    {
+      "name": "Aleksandr Kosheverov",
+      "email": "iworb.ne@gmail.com"
+    }
+  ],
+  "keywords": [
+    "pip",
+    "webui",
+    "cache"
+  ],
+  "noAnalyze": true,
+  "license": "MIT",
+  "private": false,
+  "dependencies": {},
+  "devDependencies": {
+    "pip-webui-tasks": "^1.8.0"
+  }
+}

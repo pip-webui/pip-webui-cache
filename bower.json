@@ -1,0 +1,31 @@
+{
+  "name": "pip-webui-cache",
+  "version": "1.0.0",
+  "description": "Cache system for Pip.WebUI",
+  "main": "",
+  "authors": [
+    {
+      "name": "Aleksandr Kosheverov",
+      "email": "iworb.ne@gmail.com"
+    }
+  ],
+  "license": "MIT",
+  "keywords": [
+    "pip",
+    "webui",
+    "cache"
+  ],
+  "homepage": "https://github.com/pip-webui/pip-webui-cache",
+  "ignore": [
+    ".gitignore",
+    "node_modules",
+    "bower_components",
+    "src",
+    "tests",
+    "samples",
+    "scripts",
+    "build.*",
+    "gulpfile.js",
+    "karma.conf.js"
+  ]
+}

@@ -1,0 +1,12 @@
+<div class="controls">
+    <form name="deleteForm">
+        <md-input-container md-no-float>
+            <label>ID</label>
+            <input ng-model="id" placeholder="ID" required>
+        </md-input-container>
+    </form>
+    <md-button ng-click="deletePhoto()" ng-disabled="!deleteForm.$valid">Delete photo</md-button>
+</div>
+<pre class="result">
+    {{result}}
+</pre>

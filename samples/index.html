@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html class="no-scroll">
+<head lang="en">
+    <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta http-equiv="expires" content="-1">
+    <title>Cache</title>
+
+    <link rel="stylesheet" href="../../lib/pip-webui-lib.css"/>
+    <link rel="stylesheet" href="../../dist/pip-webui-cache.css"/>
+    <link rel="stylesheet" href="styles.css"/>
+
+    <script>
+		// hak for ie
+		if (!String.prototype.startsWith) {
+			String.prototype.startsWith = function (searchString, position) {
+				position = position || 0;
+				return this.indexOf(searchString, position) === position;
+			};
+		}
+	</script>
+
+    <script src="https://www.google.com/jsapi"></script>
+    <script src="../../lib/pip-webui-lib.js"></script>
+    <script src="../../dist/pip-webui-cache.js"></script>
+
+    <script src="index.js"></script>
+
+    <script src="photos/data.service.js"></script>
+    <script src="create/create.js"></script>
+    <script src="read/read.js"></script>
+    <script src="update/update.js"></script>
+    <script src="delete/delete.js"></script>
+
+</head>
+
+<body ng-app="appCache" ng-if="!$reset" ng-controller="pipSampleController"
+     class="pip-main layout-column {{$theme}}" md-theme="{{$theme || 'blue'}}">
+<md-toolbar >
+    <div class="layout-row layout-align-start-center">
+        <md-button class="md-icon-button" aria-label="MENU" ng-if="!$mdMedia('gt-sm')" ng-click="onToggleMenu()">
+            <md-icon md-svg-icon="icons:menu" ></md-icon>
+            </md-button>
+        <div class="md-toolbar-tools">
+            <div class="flex-var text-overflow">Cache</div>
+        </div>
+
+        <md-menu md-position-mode="target-right target" ng-if="isTheme">
+            <div class="layout-row layout-align-start-center" style="  cursor: pointer;outline: none; margin-right: 16px;"
+                      ng-click="$mdOpenMenu()"
+                      aria-label="theme selection">
+                    <span style="white-space:nowrap;">
+                        {{ $theme | translate}}
+                    </span>
+                    <md-icon md-svg-icon="icons:triangle-down"></md-icon>
+            </div>
+                <md-menu-content width="3">
+                    <md-menu-item ng-repeat="theme in themes">
+                        <md-button ng-click="onThemeClick(theme)">{{theme | translate}}</md-button>
+                    </md-menu-item>
+                </md-menu-content>
+            </md-menu>
+
+        <md-menu md-position-mode="target-right target" ng-if="isTranslated">
+            <div class="layout-row layout-align-start-center" style="  cursor: pointer;outline: none; margin-right: 16px;"
+                      ng-click="$mdOpenMenu()"
+                      aria-label="language selection">
+                    <span >
+                        {{ $language | translate}}
+                    </span>
+                    <md-icon md-svg-icon="icons:triangle-down"></md-icon>
+            </div>
+                <md-menu-content width="3">
+                    <md-menu-item ng-repeat="lang in languages">
+                        <md-button ng-click="onLanguageClick(lang)">{{lang | translate}}</md-button>
+                    </md-menu-item>
+                </md-menu-content>
+            </md-menu>
+    </div>
+</md-toolbar>
+
+<div class="layout-row flex">
+    <md-sidenav md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')"
+                class="md-whiteframe-z2 md-sidenav-left layout-column color-content-bg">
+        <md-list>
+            <md-list-item ng-repeat="contentItem in content"
+                          ng-click="onSwitchPage(contentItem.state)"
+                          ng-class="{ 'selected-state': isActiveState(contentItem.state) }">
+                <p ui-sref="{{contentItem.state}}">{{contentItem.title}}</p>
+            </md-list-item>
+        </md-list>
+    </md-sidenav>
+
+    <md-content id="content" class="sample-container flex">
+        <div ui-view></div>
+    </md-content>
+</div>
+</body>
+</html>

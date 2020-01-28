@@ -1,0 +1,302 @@
+.sample-container {
+    padding: 24px;
+    display: flex;
+}
+
+.sample-container div[ui-view] {
+    display: flex;
+    flex: 1;
+}
+
+.controls {
+    display: flex;
+    flex-direction: column;
+}
+
+.controls .mat-form-field {
+    width: 100%;
+}
+
+.controls .mat-raised-button {
+    margin-bottom: 16px;
+}
+
+.result {
+    flex: 1;
+    overflow: auto;
+}
+
+.sample-container .content-divider {
+    border-top: 1px solid rgba(0, 0, 0, 0.12);
+    margin: 8px -24px;
+}
+
+.sample-container .text-subhead2 {
+    margin: 16px 0px;
+}
+
+.w-stretch {
+    width: 100%;
+}
+
+.scroll {
+    overflow: auto;
+}
+
+.sample-container h2.text-title {
+    margin-top: 0px;
+    margin-bottom: 24px;
+}
+
+.sample-container .scroll-card {
+    margin: 0px;
+    padding: 0x;
+}
+
+.sample-container p.text-body1 {
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+
+.sample-container .code-block {
+    padding: 16px;
+}
+
+.sample-container .text-input {
+    margin-bottom: 24px !important;
+}
+
+.sample-container .popover-text-container {
+    width: 50% !important;
+    padding-left: 0px;
+    margin-bottom: 24px !important;
+}
+
+.sample-container .code-block .text-subhead2 {
+    margin: 0px;
+}
+
+.sample-container pre {
+    border-radius: 4px;
+}
+
+.sample-container .flat {
+    box-shadow: none !important;
+}
+
+.divider-bottom {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.pip-recommended-header {
+    height: 45px;
+    min-height: 45px;
+    z-index: 10;
+}
+
+.pip-recommended-header .md-toolbar-tools {
+    height: 45px;
+    min-height: 45px;
+}
+
+.pip-recommended-header pip-title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.pip-recommended-header .md-button>span {
+    text-transform: none;
+}
+
+.pip-body {
+    padding: 24px !important;
+}
+
+/* Styles for Focused */
+
+.white-text {
+    color: white;
+}
+
+.white-text md-icon {
+    color: white;
+}
+
+/* Styles for Selected */
+
+.app-selected .pip-list-x {
+    background-color: grey;
+    max-height: 200px;
+    overflow-y: scroll;
+}
+
+.app-selected .pip-list-x:focus {
+    background-color: yellow;
+    outline: blue solid 1px;
+}
+
+.app-selected .pip-list-x .pip-list-x-item {
+    position: relative;
+    overflow: hidden;
+}
+
+.app-selected .pip-list-x-item:hover,
+.app-selected .pip-list-x-item.selected {
+    background-color: red;
+}
+
+/* Styles for Infinite Scroll */
+
+.app-infinite-scroll {
+    overflow-y: auto;
+    height: 500px;
+}
+
+.app-infinite-scroll .item-container {
+    width: 680px;
+    margin: 0 auto;
+}
+
+.app-infinite-scroll .item {
+    margin: 10px;
+    display: inline-block;
+    width: 200px;
+    height: 100px;
+    text-align: center;
+    line-height: 100px;
+    vertical-align: middle;
+    border: 2px solid black;
+}
+
+.p24-flex {
+    padding: 24px;
+}
+
+.p0 {
+    padding: 0 !important;
+}
+
+@media (max-width: 768px) {
+    .p24-flex {
+        padding: 16px;
+    }
+
+}
+
+
+/* Styles for Draggable */
+
+.drag-scroll-test {
+    overflow: scroll;
+    height: 400px;
+    overflow-x: hidden;
+}
+
+.drag-scroll {
+    margin-left: 0px;
+}
+
+.drag-scroll .scroll-card {
+    padding: 0px;
+}
+
+.drag-scroll [pip-drag] {
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    height: 85px;
+}
+
+.drag-scroll [pip-drag] div {
+    padding: 8px;
+    box-sizing: border-box;
+    transition: all .35s ease;
+    height: 85px;
+}
+
+.drag-scroll [pip-drag].pip-dragging {
+    opacity: 0.95;
+}
+
+.drag-scroll [pip-drag].pip-dragging div {
+    height: 85px !important;
+}
+
+.drag-scroll [pip-drop] {
+    position: relative;
+}
+
+.drag-scroll [pip-drop].pip-drag-enter div {
+    height: 55px;
+    margin-bottom: 30px !important;
+}
+
+.drag-scroll [pip-drop] div {
+    /*position: relative;*/
+    z-index: 2;
+}
+
+.selected-sample.pip-menu {
+    height: 600px;
+    overflow: auto;
+    /*for selected */
+    padding-top: 0px;
+    /*for selected scroll to element*/
+    padding-bottom: 0px;
+    /*for selected scroll to element*/
+}
+
+/* freeze */
+
+.wrapper {
+    margin-left: 0px;
+    height: 600px;
+    overflow: auto;
+}
+
+.item {
+    background-color: #ccc;
+    line-height: 48px;
+    vertical-align: middle;
+    height: 48px;
+    margin-bottom: 1px;
+}
+
+.wrapper .bg-red {
+    background: red;
+}
+
+.wrapper .bg-blue {
+    background: blue;
+}
+
+.wrapper .bg-yellow {
+    background: yellow;
+}
+
+.wrapper .bg-green {
+    background: green;
+}
+
+.div-box {
+    line-height: 48px;
+    vertical-align: middle;
+    height: 48px;
+}
+
+.box-color {
+    background-color: yellow;
+}
+
+.block1 {
+    background-color: magenta;
+    width: 200px;
+}
+
+.block2 {
+    background-color: maroon;
+    width: 200px;
+}
