@@ -73,7 +73,7 @@
     );
 
     thisModule.controller('pipSampleController',
-        function ($scope, $rootScope, $state, $mdSidenav, $mdTheming, $injector, $mdMedia, localStorageService) {
+        function ($scope, $rootScope, $state, $mdSidenav, $mdTheming, $injector, $mdMedia, $mdDialog, localStorageService, pipCache, pipCacheConfig) {
 
             var pipTranslate = $injector.has('pipTranslate') ? $injector.get('pipTranslate') : null,
                 pipTheme = $injector.has('pipTheme') ? $injector.get('pipTheme') : null;
@@ -81,6 +81,7 @@
             $scope.isTranslated = !!pipTranslate;
             $scope.isTheme = !!pipTheme;
             $scope.$mdMedia = $mdMedia;
+            $scope.cacheEnabled = pipCacheConfig.enabled;
 
             $rootScope.$theme = localStorageService.get('theme') || 'blue';
             if ($scope.isTheme) {
@@ -107,6 +108,23 @@
             $rootScope.$on('themeChanged', function (event) {
                 $state.reload();
             });
+
+            $scope.onCacheClear = function (ev) {
+                var confirm = $mdDialog.confirm()
+                    .title('Clear cache')
+                    .textContent('Do you really want to clear cache?')
+                    .targetEvent(ev)
+                    .ok('Yes')
+                    .cancel('No');
+
+                $mdDialog.show(confirm).then(function () {
+                    pipCache.clear();
+                });
+            };
+
+            $scope.setCache = function (val) {
+                pipCacheConfig.enabled = $scope.cacheEnabled;
+            };
 
             $scope.onSwitchPage = function (state) {
                 $mdSidenav('left').close();

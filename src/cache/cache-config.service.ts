@@ -1,6 +1,7 @@
 import { CacheModel } from "./cache.models";
 
 export interface ICacheConfigService {
+    enabled: boolean;
     enableLogs: boolean;
     models: CacheModel[];
     prefix: string;
@@ -8,6 +9,7 @@ export interface ICacheConfigService {
 
 export class CacheConfigService implements ICacheConfigService {
     constructor(
+        public enabled: boolean,
         public enableLogs: boolean,
         public models: CacheModel[],
         public prefix: string
@@ -24,6 +26,7 @@ class CacheConfigProvider implements ICacheConfigProvider, ng.IServiceProvider {
 
     private _service: CacheConfigService;
 
+    enabled: boolean = true;
     enableLogs: boolean = false;
     models: CacheModel[] = [];
     prefix: string = 'PipCache';
@@ -37,6 +40,7 @@ class CacheConfigProvider implements ICacheConfigProvider, ng.IServiceProvider {
 
         if (this._service == null) {
             this._service = new CacheConfigService(
+                this.enabled,
                 this.enableLogs,
                 this.models,
                 this.prefix

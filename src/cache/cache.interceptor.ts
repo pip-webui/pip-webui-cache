@@ -1,12 +1,13 @@
 import { ICacheService } from "./cache.service";
 import { CacheCollectionParams } from "./cache.models";
+import { ICacheConfigService } from "./cache-config.service";
 
 function configureInterceptor(
     $httpProvider: ng.IHttpProvider
 ) {
     "ngInject";
 
-    $httpProvider.interceptors.push(function ($q: ng.IQService, pipCache: ICacheService) {
+    $httpProvider.interceptors.push(function ($q: ng.IQService, pipCache: ICacheService, pipCacheConfig: ICacheConfigService) {
         const getDefaultParams = function (params: any): CacheCollectionParams {
             const ret: CacheCollectionParams = {};
             if (params) {
@@ -17,6 +18,7 @@ function configureInterceptor(
         };
         return {
             request: (config: ng.IRequestConfig) => {
+                if (!pipCacheConfig.enabled) { return config; }
                 for (const model of pipCache.models) {
                     for (const ik of Object.keys(model.interceptors)) {
                         const interceptor = model.interceptors[ik];

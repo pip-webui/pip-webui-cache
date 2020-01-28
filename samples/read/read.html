@@ -1,19 +1,19 @@
 <div class="controls">
-    <md-input-container md-no-float>
+    <md-input-container>
         <label>Page</label>
-        <input ng-model="page" placeholder="Page">
+        <input ng-model="page">
     </md-input-container>
-    <md-input-container md-no-float>
+    <md-input-container>
         <label>Limit</label>
-        <input ng-model="limit" placeholder="L">
+        <input ng-model="limit">
     </md-input-container>
-    <md-input-container md-no-float>
+    <md-input-container>
         <label>ID</label>
-        <input ng-model="id" placeholder="ID">
+        <input ng-model="id">
     </md-input-container>
-    <md-button ng-click="readAllPhotos()">Read all photos</md-button>
-    <md-button ng-click="readPhotos()">Read photos</md-button>
-    <md-button ng-click="readPhoto()">Read single photo</md-button>
+    <md-button class="md-primary md-raised" ng-click="readAllPhotos()">Read all photos</md-button>
+    <md-button class="md-primary md-raised" ng-click="readPhotos()">Read photos</md-button>
+    <md-button class="md-primary md-raised" ng-click="readPhoto()">Read single photo</md-button>
 </div>
 <pre class="result">
     {{result}}

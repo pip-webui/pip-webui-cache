@@ -249,6 +249,14 @@
     /*for selected scroll to element*/
 }
 
+.selected-state {
+    background-color: rgba(158,158,158,0.2);
+}
+
+.md-cache-enabled-switch {
+    padding: 0 16px;
+}
+
 /* freeze */
 
 .wrapper {
