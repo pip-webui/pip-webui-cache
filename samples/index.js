@@ -25,14 +25,19 @@
         ]
     );
 
-    function getPhotosKey(groups) { return groups && groups.id; }
-    function getPhotosParams(params) {
+    function getPhotosKey(groups) { return groups && groups.length > 1 && groups[1]; }
+    function extractPhotosPagination(params) {
         var res = {};
-        if (params.hasOwnProperty('p') && params.hasOwnProperty('l')) {
-            res.limit = parseInt(params.l, 10);
-            res.offset = (parseInt(params.p, 10) - 1) * res.limit;
+        var pars = _.cloneDeep(params);
+        if (params) {
+            if (params.hasOwnProperty('p') && params.hasOwnProperty('l'))  {
+                res.limit = parseInt(params.l, 10);
+                res.offset = (parseInt(params.p, 10) - 1) * res.limit;
+                delete pars.l;
+                delete pars.p;
+            }
         }
-        return res;
+        return [res, pars];
     }
 
     thisModule.config(function ($stateProvider, $urlRouterProvider, $mdThemingProvider, $mdIconProvider,
@@ -50,7 +55,7 @@
             $stateProvider.state(contentItem.state, contentItem);
         }
 
-        $urlRouterProvider.otherwise('/create');
+        $urlRouterProvider.otherwise('/read');
         pipCacheConfigProvider.enableLogs = true;
         pipCacheConfigProvider.models.push({
             name: 'photos',
@@ -60,12 +65,12 @@
             },
             interceptors: {
                 item: {
-                    match: new RegExp('photos\/(?<id>[^ $\/]*)'),
+                    match: new RegExp('photos/([^\/]+)$'),
                     getKey: getPhotosKey
                 },
                 collection: {
                     match: new RegExp('photos'),
-                    getParams: getPhotosParams
+                    extractPagination: extractPhotosPagination
                 }
             }
         });

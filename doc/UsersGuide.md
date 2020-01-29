@@ -42,14 +42,19 @@ angular.module('myApp', [..., 'pipCache']);
 Configure models in provider:
 ```javascript
 ...
-function getPhotosKey(groups) { return groups && groups.id; }
-function getPhotosParams(params) {
+function getPhotosKey(groups) { return groups && groups.length > 1 && groups[1]; }
+function extractPhotosPagination(params) {
     var res = {};
-    if (params.hasOwnProperty('p') && params.hasOwnProperty('l')) {
-        res.limit = parseInt(params.l, 10);
-        res.offset = (parseInt(params.p, 10) - 1) * res.limit;
+    var pars = _.cloneDeep(params);
+    if (params) {
+        if (params.hasOwnProperty('p') && params.hasOwnProperty('l'))  {
+            res.limit = parseInt(params.l, 10);
+            res.offset = (parseInt(params.p, 10) - 1) * res.limit;
+            delete pars.l;
+            delete pars.p;
+        }
     }
-    return res;
+    return [res, pars];
 }
 ...
 angular.module('myApp', [..., 'pipCache'])
@@ -63,12 +68,12 @@ angular.module('myApp', [..., 'pipCache'])
         },
         interceptors: {
             item: {
-                match: new RegExp('photos\/(?<id>[^ $\/]*)'), // Catch all requests and look for id
+                match: new RegExp('photos/([^\/]+)$'), // Catch all requests and look for id
                 getKey: getPhotosKey // return 'id' from RexExp match
             },
             collection: {
                 match: new RegExp('photos'), // Catch all requests and look for 'photos' in request
-                getParams: getPhotosParams // Custom params handler
+                extractPagination: extractPhotosPagination // Custom params handler
             }
         }
     });

@@ -5,3 +5,4 @@
 /// <reference path="angular-material/angular-material.d.ts" />
 /// <reference path="core-js/core-js.d.ts" />
 /// <reference path="dexie/dexie.d.ts" />
+/// <reference path="object-hash/object_hash.d.ts"/>

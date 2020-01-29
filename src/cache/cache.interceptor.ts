@@ -1,5 +1,4 @@
 import { ICacheService } from "./cache.service";
-import { CacheCollectionParams } from "./cache.models";
 import { ICacheConfigService } from "./cache-config.service";
 
 function configureInterceptor(
@@ -8,14 +7,6 @@ function configureInterceptor(
     "ngInject";
 
     $httpProvider.interceptors.push(function ($q: ng.IQService, pipCache: ICacheService, pipCacheConfig: ICacheConfigService) {
-        const getDefaultParams = function (params: any): CacheCollectionParams {
-            const ret: CacheCollectionParams = {};
-            if (params) {
-                if (params.hasOwnProperty('offset')) { ret.offset = parseInt(params.offset, 10); }
-                if (params.hasOwnProperty('limit')) { ret.limit = parseInt(params.limit, 10); }
-            }
-            return ret;
-        };
         return {
             request: (config: ng.IRequestConfig) => {
                 if (!pipCacheConfig.enabled) { return config; }
@@ -28,8 +19,7 @@ function configureInterceptor(
                                 case 'GET':
                                     switch (ik) {
                                         case 'item':
-                                            const { groups } = match;
-                                            return pipCache.getItem(model.name, interceptor.getKey(groups), interceptor.options)
+                                            return pipCache.getItem(model.name, interceptor.getKey(match), interceptor.options)
                                                 .then(item => {
                                                     if (!item) {
                                                         (config as any).onResponse = (body) => {
@@ -42,15 +32,14 @@ function configureInterceptor(
                                                     }
                                                 });
                                         case 'collection':
-                                            const params = interceptor.getParams ? interceptor.getParams(config.params) : getDefaultParams(config.params);
-                                            return pipCache.getItems(model.name, params, interceptor.options)
+                                            return pipCache.getItems(model.name, { httpParams: config.params, interceptor })
                                                 .then(items => {
                                                     if (!items) {
                                                         (config as any).onResponse = (body) => {
                                                             const its = interceptor.responseModify
                                                                 ? interceptor.responseModify.responseToItems(body) : body;
                                                             pipCache.setItems(model.name, its,
-                                                                { params, options: interceptor.options });
+                                                                { httpParams: config.params, interceptor });
                                                         };
                                                         return config;
                                                     } else {
@@ -79,9 +68,8 @@ function configureInterceptor(
                                 case 'DELETE':
                                     switch (ik) {
                                         case 'item':
-                                            const { groups } = match;
                                             (config as any).onResponse = (body) => {
-                                                pipCache.deleteItems(model.name, [interceptor.getKey(groups)]);
+                                                pipCache.deleteItems(model.name, [interceptor.getKey(match)]);
                                             };
                                             break;
                                         default:

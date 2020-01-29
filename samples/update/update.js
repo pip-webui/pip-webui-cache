@@ -6,7 +6,7 @@
     var thisModule = angular.module('appCache.Update', []);
 
     thisModule.controller('UpdateController',
-        function ($scope, pipPhotosData, pipCacheConfig) {
+        function ($scope, pipPhotosData) {
             "ngInject";
 
             $scope.id = undefined;
@@ -20,7 +20,7 @@
             $scope.result = '';
 
             $scope.readPhoto = function () {
-                pipPhotosData.getPhoto($scope.id, { cache: pipCacheConfig.enabled }).then(function (res) {
+                pipPhotosData.getPhoto($scope.id).then(function (res) {
                     $scope.item = res.data;
                 }, function (err) {
                     var t1 = performance.now();
@@ -34,7 +34,7 @@
             $scope.savePhoto = function () {
                 if (!$scope.item || !$scope.item.id) { return; }
                 var t0 = performance.now();
-                pipPhotosData.updatePhoto($scope.item.id, $scope.item, { cache: pipCacheConfig.enabled }).then(function (res) {
+                pipPhotosData.updatePhoto($scope.item.id, $scope.item).then(function (res) {
                     var t1 = performance.now();
                     $scope.result = JSON.stringify({
                         time: (t1 - t0).toFixed(2) + 'ms',
